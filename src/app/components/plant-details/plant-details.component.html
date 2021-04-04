@@ -1,36 +1,91 @@
 <div class="page">
-    <div class="row">
-        <div class="col-md-6 col-12">
-            <img class="plant-img" src="../../../assets/img/sad-plant.png">
-            <div class="plant-quote pt-2 pb-3">
-                “I need some water...”
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div class="row" *ngIf="measurement">
+        <div class="col-lg-6 col-12 plant-section-wrapper">
+            <div class="plant-section">
+                <div class="buttons">
+                    <button mat-button (click)="navigateToConfigure()">
+                        <span class="material-icons">settings</span> Configure
+                    </button>
+                    <button mat-button (click)="navigateToAnalytics()">
+                        <span class="material-icons">analytics</span> Analytics
+                    </button>
+                </div>
+                <div class="plant-info pb-2">
+                    <strong>{{measurement.plantName}}</strong> | {{measurement.plantSpecies}}
+                </div>
+                <img class="plant-img" *ngIf="plantStatus == PlantStatuses.Happy"
+                    src="../../../assets/img/happy-plant.png">
+                <img class="plant-img" *ngIf="plantStatus == PlantStatuses.Neutral"
+                    src="../../../assets/img/neutral-plant.png">
+                <img class="plant-img" *ngIf="plantStatus == PlantStatuses.Sad" src="../../../assets/img/sad-plant.png">
+                <div class="plant-quote pt-2 pb-3">
+                    <div *ngIf="measurement.warnings?.temperatureWarning">
+                        <span class="material-icons">format_quote</span>
+                        {{measurement.warnings?.temperatureWarning}}
+                        <span class="material-icons">format_quote</span>
+                    </div>
+                    <div *ngIf="measurement.warnings?.soilMoistureWarning">
+                        <span class="material-icons">format_quote</span>
+                        {{measurement.warnings?.soilMoistureWarning}}
+                        <span class="material-icons">format_quote</span>
+                    </div>
+                    <div *ngIf="measurement.warnings?.humidityWarning">
+                        <span class="material-icons">format_quote</span>
+                        {{measurement.warnings?.humidityWarning}}
+                        <span class="material-icons">format_quote</span>
+                    </div>
+                    <div *ngIf="measurement.warnings?.lightWarning">
+                        <span class="material-icons">format_quote</span>
+                        {{measurement.warnings?.lightWarning}}
+                        <span class="material-icons">format_quote</span>
+                    </div>
+                    <div *ngIf="plantStatus == PlantStatuses.Happy">
+                        <span class="material-icons">format_quote</span>
+                        I'm happy!
+                        <span class="material-icons">format_quote</span>
+                    </div>
+                    <div *ngIf="error">
+                        {{error}}
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-5 col-12">
+        <div class="col-lg-5 col-12" *ngIf="!error">
             <div class="row">
-                <div class="col-md-6 col-6 pl-1 pr-1 pb-2">
-                    <div class="box-text value">23</div>
+                <div class="col-md-6 col-6 pl-2 pr-3 pb-4">
+                    <div class="box-text value" [class.danger]="measurement.warnings?.temperatureWarning">
+                        {{measurement.temperature}}</div>
                     <div class="box-text prefix">°C</div>
                     <div class="box-text label">Temperature</div>
                     <img class="icon" src="../../../assets/img/temp.png">
                 </div>
-                <div class="col-md-6 col-6  pl-1 pr-1 pb-2">
-                    <div class="box-text value">85</div>
+                <div class="col-md-6 col-6  pl-2 pr-3 pb-4">
+                    <div class="box-text value" [class.danger]="measurement.warnings?.lightWarning">
+                        {{measurement.light}}
+                    </div>
                     <div class="box-text prefix">%</div>
                     <div class="box-text label">Light intensity</div>
                     <img class="icon" src="../../../assets/img/light.png">
                 </div>
-                <div class="col-md-6 col-6  pl-1 pr-1 pb-2">
-                    <div class="box-text value" [class.danger]="true">21</div>
+                <div class="col-md-6 col-6  pl-2 pr-3 pb-1">
+                    <div class="box-text value" [class.danger]="measurement.warnings?.soilMoistureWarning">
+                        {{measurement.soilMoisture}}</div>
                     <div class="box-text prefix">%</div>
                     <div class="box-text label">Soil moisture</div>
                     <img class="icon" src="../../../assets/img/soil.png">
                 </div>
-                <div class="col-md-6 col-6  pl-1 pr-1 pb-2">
-                    <div class="box-text value">40</div>
+                <div class="col-md-6 col-6  pl-2 pr-3 pb-1">
+                    <div class="box-text value" [class.danger]="measurement.warnings?.humidityWarning">
+                        {{measurement.humidity}}</div>
                     <div class="box-text prefix">%</div>
                     <div class="box-text label">Humidity</div>
                     <img class="icon" src="../../../assets/img/hum.png">
+                </div>
+                <div class="col-md-12 pr-3">
+                    <div class="float-right">
+                        Measured at: {{measurement.measuredAtTime | date:'medium'}}
+                    </div>
                 </div>
             </div>
         </div>

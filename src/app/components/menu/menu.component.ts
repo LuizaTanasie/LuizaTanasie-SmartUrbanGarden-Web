@@ -15,7 +15,4 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  navigateTo(){
-    this.router.navigateByUrl("/about");
-  }
 }

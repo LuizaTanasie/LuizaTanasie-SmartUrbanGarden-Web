@@ -1,0 +1,28 @@
+<div class="page">
+    <div class="row">
+        <div class="col-12">
+            <img class="plant-img" src="../../../assets/img/happy-plant.png">
+        </div>
+        <div class="col-lg-4 col-0"></div>
+        <div class="col-lg-3 col-10 pt-1">
+            <mat-form-field class="field mt-3" appearance="outline">
+                <mat-label>Product code</mat-label>
+                <input matInput name="productCode" [(ngModel)]="productCode" required #productCodeInput="ngModel">
+                <mat-error *ngIf="productCodeInput.hasError('required')">
+                    Please enter a product code
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-2 col-lg-1 pt-4 pb-4">
+            <button mat-flat-button color="primary" class="go" (click)="go()">Go</button>
+        </div>
+        <div class="col-12 text-center">
+            <mat-error *ngIf="notFound">
+                The device with this product code was not found.
+            </mat-error>
+            <mat-error *ngIf="error">
+                Something went wrong.
+            </mat-error>
+        </div>
+    </div>
+</div>
