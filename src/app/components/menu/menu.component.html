@@ -1,0 +1,13 @@
+<p>
+    <mat-toolbar color="secondary">
+        <button mat-icon-button class="example-icon" aria-label="Toggle navigation" [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>HappyPlant</span>
+        <span class="example-spacer"></span>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item >Item 1</button>
+            <button mat-menu-item (click)="navigateTo()">About</button>
+          </mat-menu>
+    </mat-toolbar>
+</p>
