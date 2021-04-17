@@ -1,4 +1,3 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Measurement } from 'src/app/models/measurement.model';
@@ -29,8 +28,8 @@ export class PlantDetailsComponent implements OnInit {
     this.deviceId= this.route.snapshot.paramMap.get('id');
     this.plantService.getLatestMeasurement(this.deviceId).subscribe(m => {
       this.isLoading = false;
-      this.measurement = m;
       this.calculatePlantStatus(m.warnings);
+      this.measurement = m;
     }, error => {
       this.isLoading = false;
       this.measurement = new Measurement();

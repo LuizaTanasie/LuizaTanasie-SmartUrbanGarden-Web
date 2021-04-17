@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PlantService } from 'src/app/services/plant.service';
 
@@ -8,9 +9,11 @@ import { PlantService } from 'src/app/services/plant.service';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-  public productCode: string;
   public notFound: boolean;
   public error: boolean;
+  productCodeFormControl = new FormControl('', [
+    Validators.required,
+  ]);
 
   constructor(
     private readonly router: Router,
@@ -22,7 +25,7 @@ export class LandingComponent implements OnInit {
   }
 
   go() {
-    this.service.getDeviceIdBySerialNumber(this.productCode).subscribe(id => {
+    this.service.getDeviceIdBySerialNumber(this.productCodeFormControl.value).subscribe(id => {
       this.router.navigateByUrl("/plant/" + id);
     }, err => {
       if (err.status == 404) {

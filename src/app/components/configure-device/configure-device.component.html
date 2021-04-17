@@ -1,1 +1,79 @@
-<p>configure-device works!</p>
+<div class="page">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div class="mb-3">
+        <button mat-flat-button (click)="back()" class="back"><span class="material-icons">chevron_left</span>Back</button>
+    </div>
+    <form [formGroup]="configureDeviceForm" *ngIf="device | async" (ngSubmit)="save()">
+        <div class="row">
+            <div class="col-12 border-bottom mb-4">
+                <h5>Tell us about your plant</h5>
+            </div>
+            <mat-form-field class="col-6" appearance="outline">
+                <mat-label>Plant name</mat-label>
+                <input matInput formControlName="plantName" required>
+                <mat-error *ngIf="configureDeviceForm.get('plantName').hasError('required')">
+                    Please enter a name.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-6" appearance="outline">
+                <mat-label>Plant species</mat-label>
+                <input matInput formControlName="plantSpecies" required>
+                <mat-error *ngIf="configureDeviceForm.get('plantSpecies').hasError('required')">
+                    Please enter a species.
+                </mat-error>
+            </mat-form-field>
+            <div class="col-12 border-bottom mb-4">
+                <h5>What needs does your plant have?</h5>
+            </div>
+            <div class="col-12 col-lg-6 mb-4">
+                <mat-label>What's the frequency with which your plant needs to be watered?</mat-label>
+                <mat-slider formControlName="howMuchWater" [displayWith]="sliderMeasurement" tickInterval="1" min="1" max="3">
+                </mat-slider>
+                <div class="slider-values">
+                    <span>Low</span><span>Moderate</span><span>High</span>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 mb-4">
+                <mat-label>What amount of light does your plant need to receive?</mat-label>
+                <mat-slider formControlName="howMuchLight" [displayWith]="sliderMeasurement" value="2" tickInterval="1" min="1" max="3">
+                </mat-slider>
+                <div class="slider-values">
+                    <span>Low</span><span>Moderate</span><span>High</span>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 mb-4">
+                <mat-label>What kind of temperatures does your plant need?</mat-label>
+                <mat-slider formControlName="idealTemperature" [displayWith]="sliderMeasurement" tickInterval="1" min="1" max="3">
+                </mat-slider>
+                <div class="slider-values">
+                    <span>Low</span><span>Moderate</span><span>High</span>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <mat-label>What amount of humidity should your plant receive?</mat-label>
+                <mat-slider formControlName="howMuchHumidity" [displayWith]="sliderMeasurement" tickInterval="1" min="1" max="3">
+                </mat-slider>
+                <div class="slider-values">
+                    <span>Low</span><span>Moderate</span><span>High</span>
+                </div>
+            </div>
+            <div class="col-12 border-bottom mb-3 mt-4">
+                <h5>Would you like to receive notifications when your plant needs care?</h5>
+            </div>
+            <mat-form-field class="col-10 col-lg-6" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput name="email" formControlName="email" email>
+                <mat-hint>You can unsubscribe anytime from the email body.</mat-hint>
+                <mat-error *ngIf="configureDeviceForm.get('email').hasError('email')">
+                    Please enter a valid email address.
+                </mat-error>
+            </mat-form-field>
+            <div class="col-1">
+                <span class="info-icon material-icons" [matTooltip]="configuredEmails">info</span>
+            </div>
+            <div class="col-12 border-top mb-3 mt-4 w-100">
+                <button mat-flat-button color="primary" class="save-button" type="submit">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200&display=swap');
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mat-primary-scheme: (
+  100: #c4e9cd,
+  500: #59bd6a,
+  700: #288537,
+  contrast: (
+    100: rgba(0,0,0,0.87),
+    500: #ffffff,
+    700: #ffffff,
+  )
+);
+$mat-accent-scheme: (
+  100: #ffe57f,
+  500: #ffd740,
+  700: #ffc400,
+  contrast: (
+    100: rgba(0,0,0,0.87),
+    500: rgba(0,0,0,0.87),
+    700: #ffffff,
+  )
+);
+$mat-primary-palette: mat-palette($mat-primary-scheme);
+$mat-accent-palette: mat-palette($mat-accent-scheme);
+
+$app-light-theme: mat-light-theme($mat-primary-palette, $mat-accent-palette);
+
+@include angular-material-theme($app-light-theme);
+
+// following section is for dark mode.
+// use appropriate class name for darkMode
+$app-dark-theme: mat-dark-theme($mat-primary-palette, $mat-accent-palette);
+.darkMode {
+  @include angular-material-theme($app-dark-theme);
+}
+    
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.page {
+    vertical-align: middle;
+    height: 90%;
+}
+
+a, a:active {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+a:hover {
+    color: inherit; 
+    text-decoration: inherit;
+    opacity: 0.8;
+}
+mat-spinner {
+    left:50%;
+}
+
+.mat-tooltip {
+    white-space: pre-line;
+  }

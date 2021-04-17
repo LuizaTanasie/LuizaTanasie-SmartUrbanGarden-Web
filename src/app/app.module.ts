@@ -12,12 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MenuComponent } from './components/menu/menu.component';
 import { AboutComponent } from './components/about/about.component'
 import { HttpClientModule } from '@angular/common/http';
 import { PlantService } from './services/plant.service';
 import { LandingComponent } from './components/landing/landing.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ConfigureDeviceComponent } from './components/configure-device/configure-device.component';
@@ -45,9 +47,11 @@ import { AnalyticsComponent } from './components/analytics/analytics.component';
     MatMenuModule,
     HttpClientModule,
     MatInputModule,
-    FormsModule,
     MatFormFieldModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule,
+    MatTooltipModule,
+    ReactiveFormsModule
   ],
   providers: [PlantService],
   bootstrap: [AppComponent]
