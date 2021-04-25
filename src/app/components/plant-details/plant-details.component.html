@@ -20,33 +20,10 @@
                     src="../../../assets/img/neutral-plant.png">
                 <img class="plant-img" *ngIf="plantStatus == PlantStatuses.Sad" src="../../../assets/img/sad-plant.png">
                 <div class="plant-quote pt-2 pb-3">
-                    <div *ngIf="measurement.warnings?.temperatureWarning">
+                    <div *ngFor="let warning of measurement.warnings">
                         <span class="material-icons">format_quote</span>
-                        {{measurement.warnings?.temperatureWarning}}
+                        {{warning.message}}
                         <span class="material-icons">format_quote</span>
-                    </div>
-                    <div *ngIf="measurement.warnings?.soilMoistureWarning">
-                        <span class="material-icons">format_quote</span>
-                        {{measurement.warnings?.soilMoistureWarning}}
-                        <span class="material-icons">format_quote</span>
-                    </div>
-                    <div *ngIf="measurement.warnings?.humidityWarning">
-                        <span class="material-icons">format_quote</span>
-                        {{measurement.warnings?.humidityWarning}}
-                        <span class="material-icons">format_quote</span>
-                    </div>
-                    <div *ngIf="measurement.warnings?.lightWarning">
-                        <span class="material-icons">format_quote</span>
-                        {{measurement.warnings?.lightWarning}}
-                        <span class="material-icons">format_quote</span>
-                    </div>
-                    <div *ngIf="plantStatus == PlantStatuses.Happy">
-                        <span class="material-icons">format_quote</span>
-                        I'm happy!
-                        <span class="material-icons">format_quote</span>
-                    </div>
-                    <div *ngIf="error">
-                        {{error}}
                     </div>
                 </div>
             </div>
@@ -54,14 +31,18 @@
         <div class="col-lg-5 col-12" *ngIf="!error">
             <div class="row">
                 <div class="col-md-6 col-6 pl-2 pr-3 pb-4">
-                    <div class="box-text value" [class.danger]="measurement.warnings?.temperatureWarning">
+                    <div class="box-text value"
+                        [class.danger]="hasWarning(WarningTypes.TemperatureWarning)"
+                        >
                         {{measurement.temperature}}</div>
                     <div class="box-text prefix">°C</div>
                     <div class="box-text label">Temperature</div>
                     <img class="icon" src="../../../assets/img/temp.png">
                 </div>
                 <div class="col-md-6 col-6  pl-2 pr-3 pb-4">
-                    <div class="box-text value" [class.danger]="measurement.warnings?.lightWarning">
+                    <div class="box-text value"
+                        [class.danger]="hasWarning(WarningTypes.LightWarning)"
+                        >
                         {{measurement.light}}
                     </div>
                     <div class="box-text prefix">%</div>
@@ -69,14 +50,17 @@
                     <img class="icon" src="../../../assets/img/light.png">
                 </div>
                 <div class="col-md-6 col-6  pl-2 pr-3 pb-1">
-                    <div class="box-text value" [class.danger]="measurement.warnings?.soilMoistureWarning">
+                    <div class="box-text value"
+                        [class.danger]="hasWarning(WarningTypes.SoilWarning)" >
                         {{measurement.soilMoisture}}</div>
                     <div class="box-text prefix">%</div>
                     <div class="box-text label">Soil moisture</div>
                     <img class="icon" src="../../../assets/img/soil.png">
                 </div>
                 <div class="col-md-6 col-6  pl-2 pr-3 pb-1">
-                    <div class="box-text value" [class.danger]="measurement.warnings?.humidityWarning">
+                    <div class="box-text value"
+                        [class.danger]="hasWarning(WarningTypes.HumidityWarning)"
+                        >
                         {{measurement.humidity}}</div>
                     <div class="box-text prefix">%</div>
                     <div class="box-text label">Humidity</div>

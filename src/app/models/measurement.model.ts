@@ -7,5 +7,5 @@ export class Measurement {
     light: number;
     isRaining: number;
     measuredAtTime: Date;
-    warnings: PlantCareWarning;
+    warnings: PlantCareWarning[];
 }
