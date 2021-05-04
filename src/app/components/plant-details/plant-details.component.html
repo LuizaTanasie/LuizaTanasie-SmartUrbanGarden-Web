@@ -34,7 +34,7 @@
                     <div class="box-text value"
                         [class.danger]="hasWarning(WarningTypes.TemperatureWarning)"
                         >
-                        {{measurement.temperature}}</div>
+                        {{measurement.temperature !== null ? measurement.temperature : '?'}}</div>
                     <div class="box-text prefix">°C</div>
                     <div class="box-text label">Temperature</div>
                     <img class="icon" src="../../../assets/img/temp.png">
@@ -43,7 +43,7 @@
                     <div class="box-text value"
                         [class.danger]="hasWarning(WarningTypes.LightWarning)"
                         >
-                        {{measurement.light}}
+                        {{measurement.light !== null ? measurement.light : '?'}}
                     </div>
                     <div class="box-text prefix">%</div>
                     <div class="box-text label">Light intensity</div>
@@ -52,7 +52,7 @@
                 <div class="col-md-6 col-6  pl-2 pr-3 pb-1">
                     <div class="box-text value"
                         [class.danger]="hasWarning(WarningTypes.SoilWarning)" >
-                        {{measurement.soilMoisture}}</div>
+                        {{measurement.soilMoisture !== null ? measurement.soilMoisture : '?'}}</div>
                     <div class="box-text prefix">%</div>
                     <div class="box-text label">Soil moisture</div>
                     <img class="icon" src="../../../assets/img/soil.png">
@@ -61,7 +61,7 @@
                     <div class="box-text value"
                         [class.danger]="hasWarning(WarningTypes.HumidityWarning)"
                         >
-                        {{measurement.humidity}}</div>
+                        {{measurement.humidity !== null ? measurement.humidity : '?'}}</div>
                     <div class="box-text prefix">%</div>
                     <div class="box-text label">Humidity</div>
                     <img class="icon" src="../../../assets/img/hum.png">

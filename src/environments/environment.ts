@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: "http://localhost:7071"
+  api: "https://sg-func.azurewebsites.net"
 };
 
 /*
