@@ -88,7 +88,8 @@ export class AnalyticsComponent implements OnInit {
     this.deviceId = this.route.snapshot.paramMap.get('id');
     this.getAnalytics(AnalyticsSettings.PerWeek);
   }
-
+  
+  //color
   getLineChartColor(measurementTypeId: number): Color[] {
     switch (measurementTypeId) {
       case MeasurementTypes.Temperature:
