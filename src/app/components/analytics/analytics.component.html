@@ -1,1 +1,24 @@
-<p>analytics works!</p>
+<div class="page">
+    <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+    <div class="mb-3">
+        <button mat-flat-button (click)="back()" class="back"><span
+                class="material-icons">chevron_left</span>Back</button>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <mat-button-toggle-group name="timePeriod" aria-label="Time period" (change)="settingsChanged($event)">
+                <mat-button-toggle [value]="AnalyticsSettings.PerWeek" checked="true">Last week</mat-button-toggle>
+                <mat-button-toggle [value]="AnalyticsSettings.PerMonth">Last month</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </div>
+    <div *ngIf="analytics" class="row">
+        <div *ngFor="let a of analytics" class="col-12 col-lg-6">
+            <canvas baseChart [datasets]="a.line" [labels]="a.labels"
+                [options]="a.measurementTypeId == MeasurementTypes.Temperature ? lineChartOptionsTemperature : lineChartOptions"
+                [colors]="getLineChartColor(a.measurementTypeId)" [legend]="lineChartLegend" [chartType]="lineChartType"
+                [plugins]="lineChartPlugins">
+            </canvas>
+        </div>
+    </div>
+</div>

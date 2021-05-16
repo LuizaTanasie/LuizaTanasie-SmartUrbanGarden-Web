@@ -51,6 +51,11 @@ export class PlantDetailsComponent implements OnInit {
     this.router.navigateByUrl("/analytics/" + this.deviceId);
   }
 
+  public refresh() {
+    this.router.navigateByUrl("/analytics/" + this.deviceId, {skipLocationChange: true}).then(n =>
+      this.router.navigateByUrl("/plant/" + this.deviceId));
+  }
+
   private calculatePlantStatus(warnings: PlantCareWarning[]) {
     if (warnings.length == 0) {
       this.plantStatus = PlantStatuses.Happy;

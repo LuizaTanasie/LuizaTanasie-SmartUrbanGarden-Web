@@ -2,6 +2,8 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { AnalyticsSettings } from "../models/analytics-settings";
+import { Analytics } from "../models/analytics.model";
 import { Device } from "../models/device.model";
 import { Measurement } from "../models/measurement.model";
 
@@ -28,5 +30,12 @@ export class PlantService {
 
     public saveDeviceConfiguration(device: Device): Observable<void> {
         return this.httpClient.post<void>(environment.api + "/api/SaveDeviceConfiguration", device);
+    }
+
+    public getAnalytics(deviceId: string, settingId: AnalyticsSettings): Observable<Analytics[]> {
+        return this.httpClient.get<Analytics[]>(environment.api + "/api/GetAnalytics", {
+            params: new HttpParams()
+            .set('deviceId', deviceId)
+            .set('settingId', settingId.toString())});
     }
 }
